@@ -51,4 +51,56 @@ function insertion_sort(a_list: number[]): number[] {
     return a_list
 }
 
-export { bubble_sort, insertion_sort }
+
+/**
+ * @name マージソート
+ * @param a_list: number[]
+ * @returns number[]
+ */
+function merge_sort(a_list: number[]): number[] {
+
+    if (a_list.length > 1) {
+
+        const mid: number = Math.floor(a_list.length / 2)
+
+        const left: number[] = a_list.slice(0, mid)
+        const right: number[] = a_list.slice(mid)
+
+        merge_sort(left)
+        merge_sort(right)
+
+        let left_i: number = 0
+        let right_i: number = 0
+        let a_list_i: number = 0
+
+        while ((left_i < left.length) && (right_i < right.length)) {
+
+            if (left[left_i] <= right[right_i]) {
+                a_list[a_list_i] = left[left_i]
+                left_i++
+            } else {
+                a_list[a_list_i] = right[right_i]
+                right_i++
+            }
+
+            a_list_i++
+
+        }
+
+        while(left_i < left.length) { 
+            a_list[a_list_i] = left[left_i]
+            left_i++ 
+            a_list_i++                
+        }
+
+        while(right_i < right.length) { 
+            a_list[a_list_i] = right[right_i]
+            right_i++ 
+            a_list_i++                
+        }
+    }
+
+    return a_list
+}
+
+export { bubble_sort, insertion_sort, merge_sort }
